@@ -23,7 +23,22 @@ export const SuperTokensConfig = {
   },
   // recipeList contains all the modules that you want to
   // use from SuperTokens. See the full list here: https://supertokens.com/docs/guides
-  recipeList: [EmailPassword.init(), Session.init()],
+  recipeList: [
+    EmailPassword.init({
+      signInAndUpFeature: {
+        signUpForm: {
+          formFields: [
+            {
+              id: "name",
+              label: "user name",
+              placeholder: "user name",
+            },
+          ],
+        },
+      },
+    }),
+    Session.init(),
+  ],
 };
 
 export const recipeDetails = {
