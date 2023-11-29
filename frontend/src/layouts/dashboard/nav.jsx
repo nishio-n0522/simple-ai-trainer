@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { signOut } from "supertokens-auth-react/recipe/session";
@@ -11,6 +12,8 @@ import Avatar from "@mui/material/Avatar";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import ListItemButton from "@mui/material/ListItemButton";
+
+import { getApiDomain } from "../../config";
 
 import { usePathname } from "../../routes/hooks";
 import { RouterLink } from "../../routes/components";
@@ -46,6 +49,15 @@ export default function Nav({ openNav, onCloseNav }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  useEffect(() => {
+    axios.get(getApiDomain() + "/sessioninfo").then((response) => {
+      console.log("sessioninfo", response);
+    });
+    axios.get(getApiDomain() + "/tenants").then((response) => {
+      console.log("tenant", response);
+    });
+  }, []);
+
   const renderAccount = (
     <Box
       sx={{
@@ -63,7 +75,6 @@ export default function Nav({ openNav, onCloseNav }) {
 
       <Box sx={{ ml: 2 }}>
         <Typography variant="subtitle2">{account.displayName}</Typography>
-
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {account.role}
         </Typography>
