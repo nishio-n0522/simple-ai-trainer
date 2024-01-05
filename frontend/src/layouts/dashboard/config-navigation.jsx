@@ -6,18 +6,15 @@ import ScienceIcon from "@mui/icons-material/Science";
 const navConfig = [
   {
     title: "home",
-    path: "/",
-    icon: <HomeIcon />,
+    path: "/dashboard/home",
   },
   {
     title: "dataset",
-    path: "/dataset",
-    icon: <PhotoLibraryIcon />,
+    path: "/dashboard/dataset",
   },
   {
     title: "model",
-    path: "/model",
-    icon: <ModelTrainingIcon />,
+    path: "/dashboard/model",
   },
 ];
 

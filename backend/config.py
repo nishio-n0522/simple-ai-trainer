@@ -36,8 +36,8 @@ supertokens_config=SupertokensConfig(
 
 app_info = InputAppInfo(
     app_name="Supertokens",
-    api_domain="http://localhost:3001",
-    website_domain="http://localhost:3000",
+    api_domain="http://192.168.0.8:3001",
+    website_domain="http://192.168.0.8:3000",
 )
 
 framework = "fastapi"

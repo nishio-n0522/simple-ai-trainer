@@ -124,7 +124,7 @@ export default function useChart(options) {
 
     // Legend
     legend: {
-      show: true,
+      show: false,
       fontSize: 13,
       position: "top",
       horizontalAlign: "right",

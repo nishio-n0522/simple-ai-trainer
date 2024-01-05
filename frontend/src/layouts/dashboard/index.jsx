@@ -15,7 +15,6 @@ export function Dashboard({ children }) {
   return (
     <>
       <Header onOpenNav={() => setOpenNav(true)} />
-
       <Box
         sx={{
           minHeight: 1,

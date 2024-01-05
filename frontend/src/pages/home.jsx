@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
-import { AppView } from "../sections/overview/view";
+import { HomeView } from "../sections/home/view";
+// import { AppView } from "../sections/overview/view";
 
 // ----------------------------------------------------------------------
 
@@ -11,7 +12,7 @@ export function Home() {
         <title> home | simple-ai-trainer </title>
       </Helmet>
 
-      <AppView />
+      <HomeView />
     </>
   );
 }

@@ -23,10 +23,13 @@ import { useResponsive } from "../../hooks/use-responsive";
 import { account } from "../../_mock/account";
 
 import Logo from "../../components/logo";
+import SimpleAiTrainerLogo from "../../assets/images/simple-ai-trainer_logo.png";
 import Scrollbar from "../../components/scrollbar";
 
 import { NAV } from "./config-layout";
 import navConfig from "./config-navigation";
+import { typography } from "../../theme/typography";
+import { grey } from "../../theme/palette";
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +42,7 @@ export default function Nav({ openNav, onCloseNav }) {
 
   async function logoutClicked() {
     await signOut();
-    navigate("/auth");
+    navigate("/");
   }
 
   useEffect(() => {
@@ -48,15 +51,6 @@ export default function Nav({ openNav, onCloseNav }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
-
-  useEffect(() => {
-    axios.get(getApiDomain() + "/sessioninfo").then((response) => {
-      console.log("sessioninfo", response);
-    });
-    axios.get(getApiDomain() + "/tenants").then((response) => {
-      console.log("tenant", response);
-    });
-  }, []);
 
   const renderAccount = (
     <Box
@@ -68,13 +62,15 @@ export default function Nav({ openNav, onCloseNav }) {
         display: "flex",
         borderRadius: 1.5,
         alignItems: "center",
-        bgcolor: (theme) => alpha(theme.palette.grey[500], 0.12),
+        bgcolor: grey[500],
       }}
     >
       <Avatar src={account.photoURL} alt="photoURL" />
 
       <Box sx={{ ml: 2 }}>
-        <Typography variant="subtitle2">{account.displayName}</Typography>
+        <Typography variant="subtitle2" color={grey[100]}>
+          {account.displayName}
+        </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {account.role}
         </Typography>
@@ -93,23 +89,49 @@ export default function Nav({ openNav, onCloseNav }) {
   const renderContent = (
     <Scrollbar
       sx={{
-        height: 1,
+        height: "100vh",
         "& .simplebar-content": {
-          height: 1,
+          height: "100vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
         },
+        py: 3,
       }}
     >
       <Box flexGrow={1}>
-        <Logo sx={{ mt: 3, ml: 4 }} />
+        <Stack
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="center"
+          sx={{
+            mx: 3,
+            gap: 1,
+          }}
+        >
+          <Box
+            component="img"
+            src={SimpleAiTrainerLogo}
+            sx={{
+              width: "40px",
+              height: "40px",
+              objectFit: "contain",
+            }}
+          />
+          <Typography
+            fontFamily="BIZUDPGothic"
+            fontWeight={400}
+            fontSize={typography.h6.fontSize}
+          >
+            Simple-ai-trainer
+          </Typography>
+        </Stack>
         {renderAccount}
         {renderMenu}
       </Box>
       <Button
-        color="secondary"
-        variant="outlined"
+        color="info"
+        variant="contained"
         sx={{ mx: 4 }}
         onClick={logoutClicked}
       >
@@ -131,7 +153,8 @@ export default function Nav({ openNav, onCloseNav }) {
             height: 1,
             position: "fixed",
             width: NAV.WIDTH,
-            borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
+            bgcolor: grey[100],
+            borderRight: (theme) => `solid 1px ${theme.palette.divider}`,
           }}
         >
           {renderContent}
@@ -173,24 +196,22 @@ function NavItem({ item }) {
         minHeight: 44,
         borderRadius: 0.75,
         typography: "body2",
-        color: "text.secondary",
+        color: "primary.main",
         textTransform: "capitalize",
         fontWeight: "fontWeightMedium",
         ...(active && {
-          color: "primary.main",
+          color: "primary.darker",
           fontWeight: "fontWeightSemiBold",
-          bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
+          bgcolor: (theme) => alpha(theme.palette.primary.main, 0.3),
           "&:hover": {
             bgcolor: (theme) => alpha(theme.palette.primary.main, 0.16),
           },
         }),
       }}
     >
-      <Box component="span" sx={{ width: 24, height: 24, mr: 2 }}>
-        {item.icon}
+      <Box component="span" sx={{ ml: 1 }}>
+        {item.title}
       </Box>
-
-      <Box component="span">{item.title} </Box>
     </ListItemButton>
   );
 }

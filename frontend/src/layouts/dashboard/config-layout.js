@@ -9,3 +9,7 @@ export const HEADER = {
 export const NAV = {
   WIDTH: 280,
 };
+
+export const CARD = {
+  H_HEADER: 40,
+};
